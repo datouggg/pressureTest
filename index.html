@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>焦虑程度心理测评 - 乌萨奇陪你放松</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100">
+    <!-- 装饰性背景元素 -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="floating-cloud cloud-1"></div>
+        <div class="floating-cloud cloud-2"></div>
+        <div class="floating-cloud cloud-3"></div>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="relative z-10 container mx-auto px-4 py-8 max-w-4xl">
+        <!-- 头部 -->
+        <header class="text-center mb-8 animate-fade-in">
+            <div class="inline-block mb-4">
+                <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/f28b499c-4f59-4758-8902-3012fddefcee/image_1761734836_1_1.jpg" 
+                     alt="吉伊卡哇" 
+                     class="w-24 h-24 rounded-full shadow-lg border-4 border-white mx-auto bounce-animation">
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-2">
+                焦虑程度心理测评
+            </h1>
+            <p class="text-gray-600 text-lg">🐰 吉伊卡哇陪你一起了解内心 🌸</p>
+        </header>
+
+        <!-- 欢迎页面 -->
+        <div id="welcomePage" class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 animate-slide-up">
+            <div class="text-center mb-8">
+                <div class="inline-block p-4 bg-purple-100 rounded-full mb-4">
+                    <i class="fas fa-heart text-4xl text-purple-600"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">欢迎来到心理测评</h2>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    这是一份专业的焦虑程度评估问卷，包含20道精心设计的题目。<br>
+                    请根据您最近一周的真实感受作答，每道题都没有对错之分。<br>
+                    测评大约需要5-8分钟，请在安静的环境中完成。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl">
+                    <i class="fas fa-clipboard-list text-3xl text-purple-600 mb-3"></i>
+                    <h3 class="font-bold text-gray-800 mb-2">20道题目</h3>
+                    <p class="text-sm text-gray-600">科学专业的评估体系</p>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl">
+                    <i class="fas fa-chart-line text-3xl text-pink-600 mb-3"></i>
+                    <h3 class="font-bold text-gray-800 mb-2">精准分析</h3>
+                    <p class="text-sm text-gray-600">多维度结果解读</p>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl">
+                    <i class="fas fa-shield-alt text-3xl text-blue-600 mb-3"></i>
+                    <h3 class="font-bold text-gray-800 mb-2">隐私保护</h3>
+                    <p class="text-sm text-gray-600">数据仅本地保存</p>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded-r-lg">
+                <div class="flex items-start">
+                    <i class="fas fa-lightbulb text-yellow-600 mt-1 mr-3"></i>
+                    <div>
+                        <p class="text-sm text-gray-700">
+                            <strong>温馨提示：</strong>请根据您最近一周的实际感受选择最符合的选项。
+                            测评结果仅供参考，如有严重焦虑情况，建议寻求专业心理咨询。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="startTest()" 
+                    class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 px-8 rounded-full hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                <i class="fas fa-play-circle mr-2"></i>开始测评
+            </button>
+        </div>
+
+        <!-- 测评页面 -->
+        <div id="testPage" class="hidden">
+            <!-- 进度条 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 mb-6 animate-slide-up">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-semibold text-gray-600">测评进度</span>
+                    <span class="text-sm font-bold text-purple-600" id="progressText">1/20</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                    <div id="progressBar" class="bg-gradient-to-r from-purple-600 to-pink-600 h-3 rounded-full transition-all duration-500" style="width: 5%"></div>
+                </div>
+            </div>
+
+            <!-- 题目卡片 -->
+            <div id="questionCard" class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 animate-slide-up">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/fdb6bea8-d3a7-48ab-8b1a-a85f5e14d4df/image_1761734856_6_1.jpg" 
+                             alt="仓鼠球球" 
+                             class="w-12 h-12 rounded-full mr-3">
+                        <span class="text-sm text-gray-500">第 <span id="currentQuestionNum">1</span> 题</span>
+                    </div>
+                    <div class="text-sm text-gray-400">
+                        <i class="far fa-clock mr-1"></i>
+                        <span id="timer">00:00</span>
+                    </div>
+                </div>
+
+                <h3 id="questionText" class="text-xl md:text-2xl font-bold text-gray-800 mb-8 leading-relaxed"></h3>
+
+                <div id="optionsContainer" class="space-y-4"></div>
+
+                <div class="flex justify-between mt-8 pt-6 border-t border-gray-200">
+                    <button onclick="previousQuestion()" 
+                            id="prevBtn"
+                            class="px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <i class="fas fa-arrow-left mr-2"></i>上一题
+                    </button>
+                    <button onclick="nextQuestion()" 
+                            id="nextBtn"
+                            class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        下一题<i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 结果页面 -->
+        <div id="resultPage" class="hidden">
+            <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 animate-slide-up">
+                <div class="text-center mb-8">
+                    <div class="inline-block mb-4">
+                        <img id="resultImage" 
+                             src="" 
+                             alt="结果" 
+                             class="w-32 h-32 rounded-full shadow-lg border-4 border-white mx-auto">
+                    </div>
+                    <h2 class="text-3xl font-bold mb-2" id="resultTitle"></h2>
+                    <div class="inline-block px-6 py-2 rounded-full text-white font-bold text-xl" id="resultBadge"></div>
+                </div>
+
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-semibold text-gray-600">您的得分</span>
+                        <span class="text-2xl font-bold text-purple-600" id="totalScore">0</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+                        <div id="scoreBar" class="h-4 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>0分</span>
+                        <span>20分</span>
+                        <span>40分</span>
+                        <span>60分</span>
+                        <span>80分</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 mb-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+                        <i class="fas fa-clipboard-check text-purple-600 mr-2"></i>
+                        结果分析
+                    </h3>
+                    <p id="resultDescription" class="text-gray-700 leading-relaxed"></p>
+                </div>
+
+                <div class="bg-blue-50 rounded-2xl p-6 mb-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+                        <i class="fas fa-lightbulb text-blue-600 mr-2"></i>
+                        建议与指导
+                    </h3>
+                    <ul id="suggestionsList" class="space-y-2"></ul>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-smile text-green-600 text-2xl mr-3"></i>
+                            <h4 class="font-bold text-gray-800">放松技巧</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">深呼吸、冥想、运动都是很好的放松方式</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-users text-orange-600 text-2xl mr-3"></i>
+                            <h4 class="font-bold text-gray-800">寻求支持</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">与朋友家人交流，必要时寻求专业帮助</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <button onclick="restartTest()" 
+                            class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 px-6 rounded-full hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-redo mr-2"></i>重新测评
+                    </button>
+                    <button onclick="shareResult()" 
+                            class="flex-1 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold py-4 px-6 rounded-full hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-share-alt mr-2"></i>分享结果
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="relative z-10 text-center py-8 text-gray-600">
+        <p class="text-sm">
+            <i class="fas fa-heart text-pink-500"></i> 
+            关注心理健康，从了解自己开始
+        </p>
+        <p class="text-xs mt-2 text-gray-400">
+            本测评仅供参考，不能替代专业医疗诊断
+        </p>
+    </footer>
+
+    <!-- 加载JavaScript文件 -->
+    <script src="questions.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
